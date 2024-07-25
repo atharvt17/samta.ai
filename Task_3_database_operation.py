@@ -7,7 +7,7 @@ import mysql.connector
 con = mysql.connector.connect(
     host="localhost",
     user="root", #Enter your username here
-    password="Your password" #Enter your password here
+    password="Your Password" #Enter your password here
 )
 cursor = con.cursor()
 
@@ -44,6 +44,11 @@ VALUES (%s, %s, %s, %s)
 
 con.commit()
 
+cursor.execute("SELECT * FROM students")
+rows = cursor.fetchall()
+print("\nDetails Before Updating:-\n")
+for row in rows:
+    print(row)
 
 cursor.execute("""
 UPDATE students
@@ -54,8 +59,10 @@ con.commit()
 
 cursor.execute("SELECT * FROM students")
 rows = cursor.fetchall()
+print("\nDetails After Updating:-\n")
 for row in rows:
     print(row)
+
 
 
 cursor.execute("""
@@ -65,7 +72,7 @@ WHERE last_name = %s
 con.commit()
 
 
-print("\nStudents after deleting Smith:-\n")
+print("\nDetails after deleting Smith:-\n")
 
 cursor.execute("SELECT * FROM students")
 rows = cursor.fetchall()
